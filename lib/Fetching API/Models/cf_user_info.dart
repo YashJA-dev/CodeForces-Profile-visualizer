@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
-import 'package:wp_visualizer/Fetching%20API/Exceptions/cf_user_info_exception.dart';
+import '../Exceptions/cf_user_info_exception.dart';
 
 class CfUserInfoProvider {
   Future<void> fetchUserInfo(String userHandle) async {
