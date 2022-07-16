@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wp_visualizer/Fetching%20API/Models/cf_user_info.dart';
+import 'package:wp_visualizer/Controller/Fetching%20Api/user_information.dart';
+import 'package:wp_visualizer/Model/UserData.dart';
 
 void main() {
   runApp(
@@ -8,31 +9,32 @@ void main() {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: HomePage(),
     ),
   );
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: CfUserInfoProvider().fetchUserInfo('yash13203'),
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.waiting:
-          case ConnectionState.active:
-            return const CircularProgressIndicator();
-          default:
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text('Loaded'),
-              ),
-            );
-        }
+    return FutureBuilder<UserData>(
+      future: UserInfo(handle: "yash13203").fetchUserInfo(),
+      builder: (context, snapshot) {    
+          switch(snapshot.connectionState){
+            case ConnectionState.waiting:return form("waoting");
+            default:
+            if(snapshot.hasError)return form("error");
+            else if(snapshot.hasData)return form(snapshot.data?.rank);
+            else return form("error");
+          }   
       },
     );
   }
+  Scaffold form(String text){
+    return Scaffold(
+      appBar: AppBar(title: Text(text)),
+      body: Container(),
+      );
+  }
+
 }
