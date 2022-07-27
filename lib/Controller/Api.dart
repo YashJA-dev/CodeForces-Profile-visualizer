@@ -5,10 +5,13 @@ class Api{
   String userInfoAPI(){
       return 'https://codeforces.com/api/user.info?handles=$handle';
   }
-  String ContestInfoAPI(){
+  String cntestInfoAPI(){
       return 'https://codeforces.com/api/user.rating?handle=$handle';
   } 
   String problemInfoApi(){
-    return "https://codeforces.com/api/user.status?handle=${handle}&from=1";
+    return "https://codeforces.com/api/user.status?handle=${handle}";
+  }
+  String totalBlogsApi(){
+    return "https://codeforces.com/api/user.blogEntries?handle=${handle}";
   }
 }

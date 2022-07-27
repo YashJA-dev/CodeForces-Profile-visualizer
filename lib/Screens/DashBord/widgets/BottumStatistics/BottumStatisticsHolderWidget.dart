@@ -1,14 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import '/Model/UserData.dart';
-import '/Screens/DashBord/widgets/BottumStatistics/staticsGridWIdget.dart';
+import 'package:wp_visualizer/Model/ApiData.dart';
+import 'StisticsListBuilderWidget.dart';
 
 class BottumStatisticsHolderWidget extends StatelessWidget {
-  UserData userData;
+  ApiData apiData;
   Size size;
-  BottumStatisticsHolderWidget({required this.size, required this.userData});
+  BottumStatisticsHolderWidget({required this.size, required this.apiData});
   @override
   Widget build(BuildContext context) {
     double height=size.height*0.70;
@@ -24,9 +21,9 @@ class BottumStatisticsHolderWidget extends StatelessWidget {
             topRight: Radius.circular(20),
           ),
         ),
-        child: StisticsGridBuilderWidget(
-          userData: userData,
-          height: height-10,
+        child: StisticsListBuilderWidget(
+          apiData: apiData,
+          height: height,
           width: size.width,
           size: size,
         ),

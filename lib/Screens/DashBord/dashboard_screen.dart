@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:wp_visualizer/Colors/ColorDecider.dart';
+import 'package:wp_visualizer/Model/ApiData.dart';
 import 'package:wp_visualizer/Model/UserData.dart';
 import 'package:wp_visualizer/Screens/DashBord/widgets/topBannerWidget.dart';
 
@@ -11,20 +12,29 @@ import '../../Colors/ThemeChange.dart';
 import 'widgets/BottumStatistics/BottumStatisticsHolderWidget.dart';
 
 class Dashboard extends StatelessWidget {
-  final UserData userData;
-  Dashboard({required this.userData});
-
+  late ApiData apiData;
+  late UserData userData;
+  Dashboard({required ApiData apiData}){
+    this.apiData=apiData;
+    this.userData=apiData.userData;
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: DashBoardBody(userData: userData),
+      body: DashBoardBody(apiData: apiData),
     );
   }
 }
 
 class DashBoardBody extends StatefulWidget {
-  final UserData userData;
-  DashBoardBody({required this.userData});
+  late ApiData apiData;
+  late UserData userData;
+  DashBoardBody({required ApiData apiData}){
+    this.apiData=apiData;
+    userData=apiData.userData;
+    print(apiData.problemData.getVerdictList().length);
+  }
 
   @override
   State<DashBoardBody> createState() => _DashBoardBodyState();
@@ -53,7 +63,7 @@ class _DashBoardBodyState extends State<DashBoardBody> {
       fit: StackFit.expand,
       children: [
       TopBannerWidget(height: topBannerHeight,size: size,width: size.width, userData: widget.userData), 
-      BottumStatisticsHolderWidget(size: size, userData: widget.userData)
+      BottumStatisticsHolderWidget(size: size, apiData: widget.apiData,)
       ],
     );
   }

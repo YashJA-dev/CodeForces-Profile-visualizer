@@ -40,6 +40,7 @@ dependencies:
   progress_indicator_button: ^0.0.3
   provider: ^6.0.3
   intl: ^0.17.0
+  curved_navigation_bar: ^1.0.3
 
 
 
@@ -73,6 +74,8 @@ flutter:
     - images/rating_inc.png
     - images/GraphUpArrow.avif
     - images/chart-going-up.jpg
+    - images/problem.png
+    - images/contest.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

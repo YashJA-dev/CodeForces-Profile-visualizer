@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -11,12 +9,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:progress_indicator_button/progress_button.dart';
 import 'package:provider/provider.dart';
+import 'package:wp_visualizer/Controller/Fetching%20Api/BlogsInfo_Fether.dart';
+import 'package:wp_visualizer/Controller/Fetching%20Api/ContestInfo_Fetcher.dart';
+import 'package:wp_visualizer/Controller/Fetching%20Api/problems_Fetcher.dart';
+import 'package:wp_visualizer/Model/ApiData.dart';
+import 'package:wp_visualizer/Model/BlogsInfo.dart';
+import 'package:wp_visualizer/Model/ContestInfo.dart';
+import 'package:wp_visualizer/Model/Problems.dart';
 import 'package:wp_visualizer/Screens/DashBord/dashboard_screen.dart';
+import 'package:wp_visualizer/Screens/screenHolder/screens_holder.dart';
 
-import '../Colors/ColorDecider.dart';
-import '../Colors/ThemeChange.dart';
-import '../Controller/Fetching Api/user_information.dart';
-import '../Model/UserData.dart';
+import '../../Colors/ColorDecider.dart';
+import '../../Colors/ThemeChange.dart';
+import '../../Controller/Fetching Api/user_information_fetcher.dart';
+import '../../Model/UserData.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -37,19 +43,17 @@ class _SplashScreenState extends State<SplashScreen> {
     var userNameInputTextBox = TextField(
       cursorColor: defaultPrimaryColor,
       decoration: InputDecoration(
-          labelText: 'User Name',
-          prefixIcon:IconTheme(
-            data: IconThemeData(color: defaultPrimaryColor),
-            child: Icon(Icons.person),
-          ),
-          // focusColor: defaultPrimaryColor,
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.cyan, width: 2.0),
-          ),
-          labelStyle: TextStyle(color: defaultPrimaryColor),
-          border: OutlineInputBorder(),
-          errorText: errorTextShow(userNameValidation),
-          
+        labelText: 'User Name',
+        prefixIcon: IconTheme(
+          data: IconThemeData(color: defaultPrimaryColor),
+          child: Icon(Icons.person),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.cyan, width: 2.0),
+        ),
+        labelStyle: TextStyle(color: defaultPrimaryColor),
+        border: OutlineInputBorder(),
+        errorText: errorTextShow(userNameValidation),
       ),
       autofocus: true,
       controller: userNameController,
@@ -93,7 +97,7 @@ class _SplashScreenState extends State<SplashScreen> {
               width: size.width,
               child: ProgressButton(
                 borderRadius: BorderRadius.all(Radius.circular(8)),
-                strokeWidth: 1,
+                strokeWidth: 2,
                 color: Colors.cyan,
                 child: Text(
                   "Shaw Data",
@@ -127,16 +131,22 @@ class _SplashScreenState extends State<SplashScreen> {
     animationController.forward();
     bool connection = await connectivityChk();
     if (connection) {
-      print(userName);
-      UserData dashBoard = await dashBoardData(userName);
-      if (dataCopletionChk(dashBoard)) {
+      // print(userName+" yash");
+      ApiData apidata= await bindApiData(userName);
+      if (dataCopletionChk(apidata.userData)) {
+        animationController.reset();
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Dashboard(userData: dashBoard)));
+          context,
+          MaterialPageRoute(
+            // builder: (context) => Dashboard(apiData: apidata),
+            builder: (context) => ScreensHolder(apiData: apidata,)
+
+          ),
+        );
+      } else {
+        animationController.reset();
       }
     }
-    animationController.reset();
   }
 
   Future<bool> connectivityChk() async {
@@ -172,9 +182,36 @@ class _SplashScreenState extends State<SplashScreen> {
     try {
       return await UserInfo(handle: handle).fetchUserInfo();
     } on Exception catch (e) {
-      print("exeception");
+      print("exeception 1 ${e.toString()}");
     }
     return UserData.status(status: "Server Error");
+  }
+
+  Future<ProblemData> problemsData(String handle) async {
+    try {
+      return await ProblemFetch(handle: handle).getProblemsInfo();
+    } on Exception catch (e) {
+      print("exception 2 ${e.toString()}");
+    }
+    return ProblemData.verdict(status: "Server Error ");
+  }
+
+  Future<ContestInfo> contestData(String handle) async {
+    try {
+      return await ContestInfoFetcher(handle: handle).contestFetch();
+    } on Exception catch (e) {
+      print("exception 3 ${e.toString()}");
+    }
+    return ContestInfo.verdict(status: "Server Error ");
+  }
+
+  Future<BlogsInfo> blogsData(String handle) async {
+    try {
+      return await BlogsInfoFetcher(handle: handle).blogsFetch();
+    } on Exception catch (e) {
+      print("exception 2 ${e.toString()}");
+    }
+    return BlogsInfo.verdict(status: "Server Error ");
   }
 
   bool dataCopletionChk(UserData dashBoard) {
@@ -191,8 +228,17 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     return userNameValidation == 0;
   }
-
-  changeTheme(String s) {
-    // theme=;
+  
+  Future<ApiData> bindApiData(String userName) async{
+    UserData userData = await dashBoardData(userName);
+      ProblemData problemData = await problemsData(userName);
+      ContestInfo contetsInfo = await contestData(userName);
+      BlogsInfo blogsInfo = await blogsData(userName);
+      return ApiData(
+        userData: userData,
+        problemData: problemData,
+        blogsInfo: blogsInfo,
+        contestInfo: contetsInfo,
+      );
   }
 }

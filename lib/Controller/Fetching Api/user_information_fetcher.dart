@@ -17,32 +17,34 @@ class UserInfo {
       api.userInfoAPI(),
     );
     final response = await http.get(url);
-    var jsonBody=jsonDecode(response.body);
-    if(jsonBody["status"]=="FAILED"){
-      return UserData.status(status: "FAILED");     
+    var jsonBody = jsonDecode(response.body);
+    if (jsonBody["status"] == "FAILED") {
+      return UserData.status(status: "FAILED");
     }
     var data = jsonBody["result"][0];
     /*
     loading data inside the modle
     */
-    var rank= data["rank"];
-    var maxRating=data["maxRating"];
-    var maxRank=data["maxRank"];
-    var rating=data["rating"];
+    var rank = data["rank"];
+    var maxRating = data["maxRating"];
+    var maxRank = data["maxRank"];
+    var rating = data["rating"];
+    String organization = data["organization"];
     UserData userData = new UserData(
         lastOnline: data["lastOnlineTimeSeconds"],
-        rating: rating==null?0:rating,
+        rating: rating == null ? 0 : rating,
         friendOfCount: data["friendOfCount"],
         titlePhoto: data["titlePhoto"],
         handle: data["handle"],
         avatar: data["avatar"],
+        organization:
+            (organization == null||organization == "") ? "Not in any Org.." : organization,
         contribution: data["contribution"],
-        rank: rank==null?"Unrated":rank,
-        maxRating: maxRating==null?0:maxRating,
-        maxRank: maxRank==null?"Unrated":maxRank,
+        rank: rank == null ? "Unrated" : rank,
+        maxRating: maxRating == null ? 0 : maxRating,
+        maxRank: maxRank == null ? "Unrated" : maxRank,
         registrationTime: data["registrationTimeSeconds"],
-        status: jsonBody["status"]
-        );
+        status: jsonBody["status"]);
 
     return userData;
   }
