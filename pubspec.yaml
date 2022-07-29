@@ -41,7 +41,8 @@ dependencies:
   provider: ^6.0.3
   intl: ^0.17.0
   curved_navigation_bar: ^1.0.3
-
+  url_launcher:
+  fluttertoast: ^8.0.9
 
 
 dev_dependencies:
@@ -76,6 +77,10 @@ flutter:
     - images/chart-going-up.jpg
     - images/problem.png
     - images/contest.jpg
+    - images/up.png
+    - images/down.png
+    - images/none.png
+    - images/rating.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

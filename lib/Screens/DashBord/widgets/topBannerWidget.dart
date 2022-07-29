@@ -13,7 +13,7 @@ class TopBannerWidget extends StatelessWidget {
   TopBannerWidget({required this.size,required this.height,required this.width,required this.userData});
   @override
   Widget build(BuildContext context) {
-    bool online=userData.lastOnline=="online";
+    bool online=userData.lastOnline=="Online";
     return Container(
       alignment: Alignment.topLeft,
       height: size.height,
@@ -52,7 +52,7 @@ class TopBannerWidget extends StatelessWidget {
                 userData.rank,
                 style: TextStyle(fontSize: height*0.08),
               ),
-              online?Text("${userData.lastOnline}",style: TextStyle(fontSize: height*0.07)):
+              online?Text("${userData.lastOnline}",style: TextStyle(fontSize: height*0.07,fontWeight: FontWeight.bold)):
               Text("Last Online ${userData.lastOnline}",style: TextStyle(fontSize: height*0.07)),
             ],
           ),

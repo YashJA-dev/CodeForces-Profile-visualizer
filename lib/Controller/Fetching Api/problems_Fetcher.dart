@@ -54,7 +54,6 @@ class ProblemFetch {
           map.putIfAbsent(verdict, () {
             return newList;
           });
-          print(verdict);
         }else{
           List<ProblemsInfo>? newList=map[verdict];
           newList?.add(problemsInfo);

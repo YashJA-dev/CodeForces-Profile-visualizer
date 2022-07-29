@@ -36,7 +36,7 @@ class _ScreensHolderState extends State<ScreensHolder> {
         height: 60,
         index: index,
         animationCurve: Curves.easeInOut,
-        animationDuration: Duration(milliseconds: 300),
+        animationDuration: Duration(milliseconds: 700),
         backgroundColor: Theme.of(context).primaryColor,
         onTap: (ind) {
           index = ind;
