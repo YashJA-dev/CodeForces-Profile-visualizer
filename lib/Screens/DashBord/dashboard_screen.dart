@@ -48,9 +48,9 @@ class _DashBoardBodyState extends State<DashBoardBody> {
     double topBannerHeight=(size.height * 0.30) -
               (MediaQuery.of(context).viewPadding.top + 6);
     Color rankedPrimaryColor =
-        ColorDecider(rank: widget.userData.rank).getPrimaryColor();
+        ColorDecider.fromRank(rank: widget.userData.rank).getPrimaryColor();
     Color rankedAccentColor =
-        ColorDecider(rank: widget.userData.rank).getAccentColor();
+        ColorDecider.fromRank(rank: widget.userData.rank).getAccentColor();
 
     Color primaryColor = Theme.of(context).primaryColor;
     if (primaryColor != rankedPrimaryColor) {

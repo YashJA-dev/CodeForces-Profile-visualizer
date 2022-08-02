@@ -6,29 +6,44 @@ import 'NoblogWritten/NoBlogs_written.dart';
 
 class Blogs_screen extends StatelessWidget {
   BlogsInfo blogsInfo;
-  
+
   Blogs_screen({required this.blogsInfo});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        title: Text(
-          "Blogs Written",
-          style: TextStyle(color: Colors.black),
+    var height = MediaQuery.of(context).size.height;
+    height -= (150);
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          height: 90,
+          child: AppBar(
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            title: Text(
+              "Blogs Written",
+              style: TextStyle(color: Colors.black),
+            ),
+            backgroundColor: Colors.white,
+          ),
         ),
-        backgroundColor: Colors.white,
-      ),
-      body: buildBlogsList(blogsInfo),
+        Flexible(
+          fit: FlexFit.tight,
+          // flex: 0,
+          child: buildBlogsList(blogsInfo),
+        ),
+      ],
     );
   }
 
   Widget buildBlogsList(BlogsInfo blogsInfo) {
     String status = blogsInfo.status;
-    if(status=="OK"){
-      return BlogsListBuilder(blogDataList: blogsInfo.blogDataList,);
-    }else{
+    if (status == "OK"&&blogsInfo.blogDataList.length>0) {
+      return BlogsListBuilder(
+        blogDataList: blogsInfo.blogDataList,
+      );
+    } else {
       return NoBlogs_Written();
     }
   }

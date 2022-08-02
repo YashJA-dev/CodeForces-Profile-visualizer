@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ColorDecider{
-  String rank;
-  ColorDecider({required this.rank});
+  String? rank;
+  int? rating;
+  ColorDecider.fromRating({required this.rating});
+  ColorDecider.fromRank({required this.rank});
   
   Color getAccentColor(){
     if (rank == "newbie") {
@@ -30,8 +32,34 @@ class ColorDecider{
       return Colors.black;
     }
   }
-
-  MaterialColor getPrimaryColor() {
+  MaterialColor decideByRating(){
+    print("rating $rating");
+    if(rating!<1200){
+      return getPrimaryColor(rank: "newbie");
+    }else if(rating!<1400){
+      return getPrimaryColor(rank: "pupil");
+    }else if(rating!<1600){
+      return getPrimaryColor(rank: "specialist");
+    }else if(rating!<1900){
+      return getPrimaryColor(rank: "expert");
+    }else if(rating!<2100){
+      return getPrimaryColor(rank: "candidate master");
+    }else if(rating!<2300){
+      return getPrimaryColor(rank: "master");
+    }else if(rating!<2400){
+      return getPrimaryColor(rank: "international master");
+    }else if(rating!<2600){
+      return getPrimaryColor(rank: "grandmaster");
+    }else if(rating!<3000){
+      return getPrimaryColor(rank: "international grandmaster");
+    }else {
+      return getPrimaryColor(rank: "legendary grandmaster");
+    }
+  }
+  MaterialColor getPrimaryColor({String rank="getUp"}) {
+    if(rank=="getUp"){
+      rank=this.rank!;
+    }
     if (rank == "newbie") {
       return Colors.blueGrey;
     } else if (rank == "pupil") {

@@ -93,7 +93,7 @@ class RankingStatistics extends StatelessWidget {
                     Text(
                       "${userData.maxRank} \n ( ${userData.maxRating} )",
                       style: TextStyle(
-                        color: ColorDecider(rank: userData.maxRank)
+                        color: ColorDecider.fromRank(rank: userData.maxRank)
                             .getPrimaryColor(),
                         fontWeight: FontWeight.bold,
                         fontSize: height * 0.03,

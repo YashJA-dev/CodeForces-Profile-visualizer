@@ -2,7 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import '/Model/ApiData.dart';
 import '/Screens/Blogs/Blogs_screen.dart';
-import '/Screens/Contest/Contest_Screen.dart';
+import '../Contest/Contest_graph_Screen.dart';
 
 import '../DashBord/dashboard_screen.dart';
 
@@ -36,7 +36,7 @@ class _ScreensHolderState extends State<ScreensHolder> {
         height: 60,
         index: index,
         animationCurve: Curves.easeInOut,
-        animationDuration: Duration(milliseconds: 700),
+        animationDuration: Duration(milliseconds: 500),
         backgroundColor: Theme.of(context).primaryColor,
         onTap: (ind) {
           index = ind;

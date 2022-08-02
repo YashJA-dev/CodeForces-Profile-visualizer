@@ -41,7 +41,7 @@ class BlogsListTile extends StatelessWidget {
   Column _getLeading(int rating) {
     var leadingItems = [];
     if (rating == 0) {
-      leadingItems.add(FittedBox(child: Image.asset("images/none.png")));
+      leadingItems.add(formImage("images/none.png"));
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -49,12 +49,12 @@ class BlogsListTile extends StatelessWidget {
         ],
       );
     } else if (rating > 0) {
-      leadingItems.add(Image.asset("images/up.png"));
+      leadingItems.add(formImage("images/up.png"));
       leadingItems.add(
         Text("$rating", style: TextStyle(color: Colors.green),textAlign: TextAlign.center,),
       );
     } else {
-      leadingItems.add(Image.asset("images/down.png"));
+      leadingItems.add(formImage("images/down.png"));
       leadingItems.add(
         Text("$rating", style: TextStyle(color: Colors.red),textAlign: TextAlign.center,),
       );
@@ -63,5 +63,15 @@ class BlogsListTile extends StatelessWidget {
       Flexible(flex: 2, child: leadingItems[0]),
       Flexible(child: leadingItems[1])
     ]);
+  }
+  Container formImage(String url){
+    return Container(
+        height: 50,
+        width: 50,
+        child: FittedBox(
+          alignment: Alignment.center,
+          child: Image.asset(url),
+        ),
+      );
   }
 }

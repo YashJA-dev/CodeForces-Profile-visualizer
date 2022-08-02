@@ -7,22 +7,14 @@ class BlogsListBuilder extends StatelessWidget {
   BlogsListBuilder({required this.blogDataList});
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-          Flexible(
-            fit: FlexFit.tight,
-            child: ListView.builder(
-              itemCount: blogDataList.length,
-              itemBuilder: (context, index) {
-                return BlogsListTile(
-                  blogData: blogDataList[index],
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+    return ListView.builder(
+      padding: EdgeInsets.zero,
+      itemCount: blogDataList.length,
+      itemBuilder: (context, index) {
+        return BlogsListTile(
+          blogData: blogDataList[index],
+        );
+      },
     );
   }
 }
