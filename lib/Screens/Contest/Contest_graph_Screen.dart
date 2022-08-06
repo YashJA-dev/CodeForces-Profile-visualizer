@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:wp_visualizer/Model/ApiData.dart';
 
 import 'ContestBuilder/contest_listBuilder.dart';
+import 'GraphHolderBuilder.dart';
 
 class Contest_Graph_screen extends StatelessWidget {
   ApiData apiData;
@@ -17,9 +15,7 @@ class Contest_Graph_screen extends StatelessWidget {
           Flexible(
             fit: FlexFit.tight,
             flex: 2,
-            child: Container(
-              decoration: BoxDecoration(color: Colors.amber),
-            ),
+            child: GraphHolderBuilder(apiData: apiData),
           ),
           Flexible(
             fit: FlexFit.tight,
@@ -32,4 +28,5 @@ class Contest_Graph_screen extends StatelessWidget {
       ),
     );
   }
+
 }

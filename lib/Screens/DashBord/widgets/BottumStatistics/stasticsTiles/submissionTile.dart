@@ -1,26 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:wp_visualizer/Model/Problems.dart';
 
+import '../../../../../Controller/Fetching Api/problems_Fetcher.dart';
+
 class SubmissionTile extends StatelessWidget {
   ProblemData problemsData;
   double height;
-  late Map<String,List<ProblemsInfo>> verdictList;
+  late Map<String, PiChartData_rating> verdictList;
   SubmissionTile({required this.problemsData, required this.height});
   @override
   Widget build(BuildContext context) {
-   verdictList=problemsData.getVerdictList();
-   int? OK=verdictList["OK"]?.length;
-   int? WRONG_ANSWER=verdictList["WRONG_ANSWER"]?.length;
-   int? RUNTIME_ERROR=verdictList["RUNTIME_ERROR"]?.length;
-   int? TIME_LIMIT_EXCEEDED=verdictList["TIME_LIMIT_EXCEEDED"]?.length;
-   int? SKIPPED=verdictList["SKIPPED"]?.length;
-   int? PARTIAL=verdictList["PARTIAL"]?.length;
-   int? MEMORY_LIMIT_EXCEEDED=verdictList["MEMORY_LIMIT_EXCEEDED"]?.length;
-   int? COMPILATION_ERROR=verdictList["COMPILATION_ERROR"]?.length;
-   int? IDLENESS_LIMIT_EXCEEDED=verdictList["IDLENESS_LIMIT_EXCEEDED"]?.length;
-   int? CHALLENGED=verdictList["CHALLENGED"]?.length;
-   int? PRESENTATION_ERROR=verdictList["PRESENTATION_ERROR"]?.length;
-   
+    verdictList = problemsData.verdicts_data_pie;
+    int? OK = verdictList["OK"]==null?0:verdictList["OK"]!.getCount;
+    int? WRONG_ANSWER = verdictList["WRONG_ANSWER"] == null
+        ? 0
+        : verdictList["WRONG_ANSWER"]!.count;
+    int? RUNTIME_ERROR = verdictList["RUNTIME_ERROR"] == null
+        ? 0
+        : verdictList["RUNTIME_ERROR"]!.count;
+    int? TIME_LIMIT_EXCEEDED = verdictList["TIME_LIMIT_EXCEEDED"] == null
+        ? 0
+        : verdictList["TIME_LIMIT_EXCEEDED"]!.count;
+    int? SKIPPED =
+        verdictList["SKIPPED"] == null ? 0 : verdictList["SKIPPED"]!.count;
+    int? PARTIAL =
+        verdictList["PARTIAL"] == null ? 0 : verdictList["PARTIAL"]!.count;
+    int? MEMORY_LIMIT_EXCEEDED = verdictList["MEMORY_LIMIT_EXCEEDED"] == null
+        ? 0
+        : verdictList["MEMORY_LIMIT_EXCEEDED"]!.count;
+    int? COMPILATION_ERROR = verdictList["COMPILATION_ERROR"] == null
+        ? 0
+        : verdictList["COMPILATION_ERROR"]!.count;
+    int? IDLENESS_LIMIT_EXCEEDED =
+        verdictList["IDLENESS_LIMIT_EXCEEDED"] == null
+            ? 0
+            : verdictList["IDLENESS_LIMIT_EXCEEDED"]!.count;
+    int? CHALLENGED = verdictList["CHALLENGED"] == null
+        ? 0
+        : verdictList["CHALLENGED"]!.count;
+    int? PRESENTATION_ERROR = verdictList["PRESENTATION_ERROR"] == null
+        ? 0
+        : verdictList["PRESENTATION_ERROR"]!.count;
+
     return Card(
       elevation: 10,
       child: Container(
@@ -33,36 +54,38 @@ class SubmissionTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   rowText(
+                  rowText(
                     first: "Accepted ",
-                    sec: "${OK==null?0:OK}",
+                    sec: "${OK == null ? 0 : OK}",
                     firstTextColor: Colors.black,
                     SecTextColor: Colors.green,
                     height: height * 0.03,
                   ),
                   rowText(
                     first: "Wrong Answer ",
-                    sec: "${WRONG_ANSWER!=null?WRONG_ANSWER:0}",
+                    sec: "${WRONG_ANSWER != null ? WRONG_ANSWER : 0}",
                     firstTextColor: Colors.black,
                     SecTextColor: Colors.red,
                     height: height * 0.03,
                   ),
                   rowText(
                     first: "Compile Time Err.. ",
-                    sec: "${COMPILATION_ERROR!=null?COMPILATION_ERROR:0}",
+                    sec: "${COMPILATION_ERROR != null ? COMPILATION_ERROR : 0}",
                     firstTextColor: Colors.black,
                     SecTextColor: Colors.red,
                     height: height * 0.03,
                   ),
                   rowText(
                     first: "Time Limit Ext.. ",
-                    sec: "${TIME_LIMIT_EXCEEDED!=null?TIME_LIMIT_EXCEEDED:0}",
+                    sec:
+                        "${TIME_LIMIT_EXCEEDED != null ? TIME_LIMIT_EXCEEDED : 0}",
                     firstTextColor: Colors.black,
                     SecTextColor: Colors.red,
                     height: height * 0.03,
-                  ),rowText(
+                  ),
+                  rowText(
                     first: "Skipped ",
-                    sec: "${SKIPPED!=null?SKIPPED:0}",
+                    sec: "${SKIPPED != null ? SKIPPED : 0}",
                     firstTextColor: Colors.black,
                     SecTextColor: Colors.blueGrey,
                     height: height * 0.03,

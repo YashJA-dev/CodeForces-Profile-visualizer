@@ -1,22 +1,36 @@
 import '../Controller/DateConverter.dart';
+import '../Controller/Fetching Api/problems_Fetcher.dart';
 
 class ProblemData {
   String? _status = null;
   List<ProblemsInfo> _result = [];
-  Map<String, List<ProblemsInfo>> _list_verdict=new Map<String, List<ProblemsInfo>>();
+  //verdict section pie data
+  Map<String, PiChartData_rating> _verdicts_data_pie =
+      new Map<String, PiChartData_rating>();
+
+  //laguages section pie data
+  Map<String, PiChartData_rating> _languages_data_pie =
+      new Map<String, PiChartData_rating>();
+
+  Map<int, Map<String, int>> _subbmissions_rating=new  Map<int, Map<String, int>>();
+
+
   ProblemData.verdict({required String status}) : _status = status;
   ProblemData({
     required String status,
     required List<ProblemsInfo> result,
-    required Map<String, List<ProblemsInfo>> list_verdict,
+    required Map<String, PiChartData_rating> verdicts_data_pie,
+    required Map<String, PiChartData_rating> languages_data_pie,
+    required Map<int, Map<String, int>> subbmissions_rating,
   })  : _status = status,
         _result = List.from(result),
-        _list_verdict = Map.from(list_verdict);
-
+        _verdicts_data_pie =(verdicts_data_pie),
+        _languages_data_pie = (languages_data_pie),
+        _subbmissions_rating=(subbmissions_rating);
+  get subbmissions_rating => this._subbmissions_rating;
   get status => this._status;
-  Map<String, List<ProblemsInfo>> getVerdictList(){
-    return _list_verdict;
-  }
+  Map<String, PiChartData_rating> get verdicts_data_pie => this._verdicts_data_pie;
+  Map<String, PiChartData_rating> get languages_data_pie => this._languages_data_pie;
   get getResult => this._result;
 }
 

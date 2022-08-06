@@ -41,7 +41,7 @@ class RankingStatistics extends StatelessWidget {
                       sec: "${userData.contribution}",
                       firstTextColor: Colors.black,
                       SecTextColor: userData.contribution < 0
-                          ? Colors.grey
+                          ? Color.fromARGB(255, 243, 6, 6)
                           : Colors.green,
                       height: height * 0.03,
                     ),

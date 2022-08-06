@@ -33,7 +33,6 @@ class DashBoardBody extends StatefulWidget {
   DashBoardBody({required ApiData apiData}){
     this.apiData=apiData;
     userData=apiData.userData;
-    print(apiData.problemData.getVerdictList().length);
   }
 
   @override

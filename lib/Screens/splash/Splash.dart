@@ -5,7 +5,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart'
     show FilteringTextInputFormatter, TextInputFormatter, rootBundle;
-import 'package:google_fonts/google_fonts.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:progress_indicator_button/progress_button.dart';
 import 'package:provider/provider.dart';
@@ -164,7 +163,6 @@ class _SplashScreenState extends State<SplashScreen> {
       });
       return userNameValidation == 0;
     } on Exception catch (e) {
-      print(e.toString());
       return false;
     }
   }
@@ -182,36 +180,35 @@ class _SplashScreenState extends State<SplashScreen> {
     try {
       return await UserInfo(handle: handle).fetchUserInfo();
     } on Exception catch (e) {
-      print("exeception 1 ${e.toString()}");
+       return UserData.status(status: "Server Error");
     }
-    return UserData.status(status: "Server Error");
+   
   }
 
   Future<ProblemData> problemsData(String handle) async {
     try {
       return await ProblemFetch(handle: handle).getProblemsInfo();
     } on Exception catch (e) {
-      print("exception 2 ${e.toString()}");
+         return ProblemData.verdict(status: "Server Error ");
     }
-    return ProblemData.verdict(status: "Server Error ");
+ 
   }
 
   Future<ContestInfo> contestData(String handle) async {
     try {
       return await ContestInfoFetcher(handle: handle).contestFetch();
     } on Exception catch (e) {
-      print("exception 3 ${e.toString()}");
+       return ContestInfo.verdict(status: "Server Error ");
     }
-    return ContestInfo.verdict(status: "Server Error ");
+   
   }
 
   Future<BlogsInfo> blogsData(String handle) async {
     try {
       return await BlogsInfoFetcher(handle: handle).blogsFetch();
     } on Exception catch (e) {
-      print("exception 2 ${e.toString()}");
+      return BlogsInfo.verdict(status: "Server Error ");
     }
-    return BlogsInfo.verdict(status: "Server Error ");
   }
 
   bool dataCopletionChk(UserData dashBoard) {
