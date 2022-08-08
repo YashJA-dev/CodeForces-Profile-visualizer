@@ -11,7 +11,7 @@ class Subbmissions_verdict extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:Text("Subbmisiions Verdicts")),
+      appBar: AppBar(title:Text("Verdicts of User"),centerTitle: true,),
       body: Subbmissions_verdictBody(problemData: problemData),
     );
   }

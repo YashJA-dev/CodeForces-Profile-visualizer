@@ -69,19 +69,27 @@ class Contest_blogs extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Flexible(fit: FlexFit.tight,child: Image.asset("images/contest.jpg",fit:BoxFit.cover)),
-                  Text(
-                    "Total Contests Paticipated",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey,
+                  Flexible(flex: 2,fit: FlexFit.tight,child: Image.asset("images/contest.jpg",fit:BoxFit.cover)),
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: Text(
+                      "Total Contests Paticipated",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                  Text(
-                    "${contestInfo.contestDataList.length}",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.red),
+                  Flexible(
+                    flex: 0,
+                    fit: FlexFit.tight,
+                    child: Text(
+                      "${contestInfo.contestDataList.length}",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.red),
+                    ),
                   )
                 ],
               ),

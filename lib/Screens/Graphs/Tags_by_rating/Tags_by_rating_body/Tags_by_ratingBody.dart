@@ -6,9 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:wp_visualizer/Controller/Fetching%20Api/problems_Fetcher.dart';
 import 'package:wp_visualizer/Model/Problems.dart';
 
-import '../../../../Controller/GraphsInfo/Problems_in_Range.dart';
+import '../../../../Providers/Problems_in_Range.dart';
 import '../../../../Providers/TagsByRating_Provider.dart';
-import 'widgets/Rating_selectorWidget.dart';
+import 'widgets/RatingSelectorWidget/Rating_selectorWidget.dart';
+import 'widgets/TagsGraphVisualizer/TagsGraphWidget.dart';
 
 class Tags_by_ratingBody extends StatefulWidget {
   ProblemData problemData;
@@ -29,8 +30,8 @@ class _Tags_by_ratingBodyState extends State<Tags_by_ratingBody> {
   @override
   Widget build(BuildContext context) {
     ProblemData problemData = widget.problemData;
+    ProblemsInRange problemsInRange=widget.problemsInRange;
     subbmissions_rating = problemData.subbmissions_rating;
-    tagsData = widget.problemsInRange.getTags();
     double ProblemCount = problemData.getResult.length * 1.0;
     var mediaQuery = MediaQuery.of(context);
     double height = (mediaQuery.size.height) -
@@ -38,27 +39,22 @@ class _Tags_by_ratingBodyState extends State<Tags_by_ratingBody> {
         mediaQuery.viewPadding.top;
     double width = mediaQuery.size.width;
     return ChangeNotifierProvider(
-        create:(_)=>Tags_by_rating_Provider(),
-        child: Container(
+      create: (_) => Tags_by_rating_Provider(),
+      child: Container(
         height: height,
         width: width,
-        child:  Column(mainAxisSize: MainAxisSize.min, children: [
-            Flexible(
-              flex: 1,
-              child: Rating_selectorWidget(),  
-            ),
-            Flexible(
-                flex: 3,
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.red),
-                )),
-            Flexible(
-                flex: 1,
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.pink),
-                )),
-          ]),
-        ),
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          Flexible(
+            flex: 1,
+            child: Rating_selectorWidget(),
+          ),
+          Flexible(
+            flex: 4,
+            child: TagsGraphWidget(problemData: problemData),
+          ),
+          
+        ],),
+      ),
     );
   }
 }

@@ -99,19 +99,28 @@ class SubmissionTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Flexible(child: Image.asset("images/problem.png")),
-                  Text(
-                    "Total Subbmision",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey,
+                  Flexible(flex: 3,
+                      fit: FlexFit.tight,
+                      child: Image.asset("images/problem.png",fit: BoxFit.cover,),),
+                  Flexible(
+                    flex: 1,
+                      fit: FlexFit.tight,
+                    child: Text(
+                      "Total Subbmision",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                  Text(
-                    "${problemsData.getResult.length}",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.red),
+                  Flexible(
+                    flex: 0,
+                    child: Text(
+                      "${problemsData.getResult.length}",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.red),
+                    ),
                   )
                 ],
               ),

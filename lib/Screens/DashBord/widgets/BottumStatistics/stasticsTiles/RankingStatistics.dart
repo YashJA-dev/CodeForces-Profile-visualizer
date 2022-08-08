@@ -79,26 +79,39 @@ class RankingStatistics extends StatelessWidget {
                   children: [
                     Container(
                       child: Flexible(
+                        flex: 3,
+                      fit: FlexFit.tight,
                         child: Image.asset(
                           "images/chart-going-up.jpg",
                           fit: BoxFit.fill,
                         ),
                       ),
                     ),
-                    Text(
-                      "Maximum Rating ",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "${userData.maxRank} \n ( ${userData.maxRating} )",
-                      style: TextStyle(
-                        color: ColorDecider.fromRank(rank: userData.maxRank)
-                            .getPrimaryColor(),
-                        fontWeight: FontWeight.bold,
-                        fontSize: height * 0.03,
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: FittedBox(
+                        child: Text(
+                          "Maximum Rating ",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold),
+                        ),
                       ),
-                      textAlign: TextAlign.center,
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: FittedBox(
+                        child: Text(
+                          "${userData.maxRank} \n ( ${userData.maxRating} )",
+                          style: TextStyle(
+                            color: ColorDecider.fromRank(rank: userData.maxRank)
+                                .getPrimaryColor(),
+                            fontWeight: FontWeight.bold,
+                            fontSize: height * 0.03,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
                   ],
                 ),

@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
+import '../NotGivenAnyContest.dart';
 import '/Model/ContestInfo.dart';
 import 'ContestListTile.dart';
+import 'package:flutter/material.dart';
 
 class ContestListBuilder extends StatelessWidget {
   ContestInfo contestInfo;
@@ -10,11 +10,13 @@ class ContestListBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<ContestData> contestList=contestInfo.contestDataList;
-    return ListView.builder(
-      itemCount: contestList.length,
+    int length=contestList.length;
+    return length!=0?ListView.builder(
+      itemCount: length,
+      reverse: false,
       itemBuilder: ((context, index) {
-        return ListTileBuilder(contestData: contestList[index],);
+        return ListTileBuilder(contestData: contestList[length-index-1],);
       }),
-    );
+    ):NotGivenAnyContest();
   }
 }

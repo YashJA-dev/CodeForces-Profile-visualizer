@@ -11,7 +11,7 @@ class Tags_by_rating extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Tags By Rating",
+          "Tags Solved Between Rating",
         ),
         centerTitle: true,
       ),

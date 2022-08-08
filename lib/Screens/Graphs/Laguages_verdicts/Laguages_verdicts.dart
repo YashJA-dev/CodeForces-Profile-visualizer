@@ -11,7 +11,7 @@ class Laguages_verdicts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Language Verdicts")),
+      appBar: AppBar(title: Text("Language's of User"),centerTitle: true),
       body: LanguageVerdictsBody(problemData :problemData),
     );
   }

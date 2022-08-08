@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:wp_visualizer/Colors/ColorDecider.dart';
+import 'package:wp_visualizer/Screens/DashBord/widgets/BottumStatistics/stasticsTiles/submissionTile.dart';
 
 import '/Controller/Api.dart';
 import '/Model/Problems.dart';
@@ -40,17 +41,22 @@ class ProblemFetch {
       for (var objectResult in resultJson) {
         var problem = objectResult["problem"];
         List<String> tagsOfProblem = [];
-        int? rating = null;
+        int? rating = problem["rating"];
         for (String tag in problem["tags"]) {
-          if (_isNumeric(tag)) rating = int.parse(tag);
           tagsOfProblem.add(tag);
         }
         if (rating != null) {
-          subbmissions_rating.putIfAbsent(rating, () => Map<String, int>());
+          if(subbmissions_rating[rating]==null){
+            subbmissions_rating[rating]=Map();
+          }
           for (String tag in problem["tags"]) {
-            subbmissions_rating[rating]!.putIfAbsent(tag, () => 0);
-            int count = subbmissions_rating[rating]![tag]! + 1;
-            subbmissions_rating[rating]![tag] = count;
+            if(subbmissions_rating[rating]![tag]==null){
+              subbmissions_rating[rating]![tag]=1;
+            }else{
+              int? count=subbmissions_rating[rating]![tag];
+              count=count!+1;
+              subbmissions_rating[rating]![tag]=count;
+            }
           }
         }
 
@@ -87,7 +93,7 @@ class ProblemFetch {
         } else {
           laguages_data_pie[laguage]!.increaseCount();
         }
-
+        
         problemsInfoList.add(problemsInfo);
       }
     }
@@ -100,12 +106,6 @@ class ProblemFetch {
     );
   }
 
-  bool _isNumeric(String s) {
-    if (s == null) {
-      return false;
-    }
-    return double.tryParse(s) != null;
-  }
 }
 
 class PiChartData_rating {
@@ -113,8 +113,8 @@ class PiChartData_rating {
   Color color;
   PiChartData_rating({required this.color, required this.count});
   get getCount => this.count;
-  void increaseCount() {
-    count++;
+  void increaseCount({int inc=1}) {
+    count=count+inc;
   }
 
   get getColor => this.color;

@@ -26,6 +26,7 @@ class _HomeState extends State<Home> {
         builder: (context, themData, child) {
           return MaterialApp(
             title: 'CodeForces',
+            showPerformanceOverlay: false,
             theme: ThemeData(
                 primarySwatch: themData.primaryColor, accentColor: themData.accentColor),
             home: SplashScreen(),
