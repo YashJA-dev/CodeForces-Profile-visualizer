@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:wp_visualizer/Colors/ThemeChange.dart';
 import 'package:wp_visualizer/Controller/Fetching%20Api/user_information_fetcher.dart';
@@ -19,6 +20,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return ChangeNotifierProvider<ThemeChange>(
       create: (context) =>
           ThemeChange(accentColor: Colors.black, primaryColor: Colors.cyan),
@@ -28,7 +33,8 @@ class _HomeState extends State<Home> {
             title: 'CodeForces',
             showPerformanceOverlay: false,
             theme: ThemeData(
-                primarySwatch: themData.primaryColor, accentColor: themData.accentColor),
+                primarySwatch: themData.primaryColor,
+                accentColor: themData.accentColor),
             home: SplashScreen(),
           );
         },

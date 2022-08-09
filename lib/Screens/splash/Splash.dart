@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart'
     show FilteringTextInputFormatter, TextInputFormatter, rootBundle;
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:progress_indicator_button/progress_button.dart';
 import 'package:provider/provider.dart';
 import 'package:wp_visualizer/Controller/Fetching%20Api/BlogsInfo_Fether.dart';
@@ -105,8 +106,11 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                 ),
                 onPressed: (AnimationController animationController) async {
-                  await fetchData(userNameController, animationController);
+                  await fetchData(userNameController: userNameController,animationController:  animationController);
                 },
+                // onPressed: ()async{
+                //     await fetchData(userNameController: userNameController);
+                // },
               ),
             ),
           ],
@@ -124,20 +128,18 @@ class _SplashScreenState extends State<SplashScreen> {
     return null;
   }
 
-  fetchData(TextEditingController userNameController,
-      AnimationController animationController) async {
+  fetchData({required TextEditingController userNameController,
+      required AnimationController animationController}) async {
     String userName = userNameController.text;
     animationController.forward();
     bool connection = await connectivityChk();
     if (connection) {
-      // print(userName+" yash");
       ApiData apidata= await bindApiData(userName);
       if (dataCopletionChk(apidata.userData)) {
         animationController.reset();
         Navigator.push(
           context,
           MaterialPageRoute(
-            // builder: (context) => Dashboard(apiData: apidata),
             builder: (context) => ScreensHolder(apiData: apidata,)
 
           ),
@@ -180,7 +182,9 @@ class _SplashScreenState extends State<SplashScreen> {
     try {
       return await UserInfo(handle: handle).fetchUserInfo();
     } on Exception catch (e) {
-       return UserData.status(status: "Server Error");
+        Fluttertoast.showToast(msg:e.toString()+" 1");
+
+       return UserData.status(status: e.toString());
     }
    
   }
@@ -189,7 +193,8 @@ class _SplashScreenState extends State<SplashScreen> {
     try {
       return await ProblemFetch(handle: handle).getProblemsInfo();
     } on Exception catch (e) {
-         return ProblemData.verdict(status: "Server Error ");
+        Fluttertoast.showToast(msg:e.toString()+" 2");
+         return ProblemData.verdict(status: "Server Error2 ");
     }
  
   }
@@ -198,7 +203,8 @@ class _SplashScreenState extends State<SplashScreen> {
     try {
       return await ContestInfoFetcher(handle: handle).contestFetch();
     } on Exception catch (e) {
-       return ContestInfo.verdict(status: "Server Error ");
+      Fluttertoast.showToast(msg:e.toString()+" 3");
+       return ContestInfo.verdict(status: "Server Error3");
     }
    
   }
@@ -207,7 +213,8 @@ class _SplashScreenState extends State<SplashScreen> {
     try {
       return await BlogsInfoFetcher(handle: handle).blogsFetch();
     } on Exception catch (e) {
-      return BlogsInfo.verdict(status: "Server Error ");
+      Fluttertoast.showToast(msg:e.toString()+" 4");
+      return BlogsInfo.verdict(status: "Server Error4 ");
     }
   }
 
@@ -215,7 +222,7 @@ class _SplashScreenState extends State<SplashScreen> {
     userNameValidation = 0;
     if (dashBoard.status == "FAILED") {
       userNameValidation = -2;
-    } else if (dashBoard.status == "Server Error") {
+    } else if (dashBoard.status != "OK") {
       userNameValidation = -3;
     }
     if (userNameValidation != 0) {
