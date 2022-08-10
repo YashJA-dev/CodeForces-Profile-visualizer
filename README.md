@@ -2,46 +2,46 @@
 
 Mobile Application created in flutter which gives detailed analysis of users codeforces profile
 
-## Features Of C.F.P.V
+# Features Of C.F.P.V
 
 1-different Ui for users of different rating 
 
 
-## newbie
+# newbie
 
 
 ![newbie](https://user-images.githubusercontent.com/73610050/183649724-73b8b0c1-11b8-4d73-96e3-cd2ab6adf3d2.jpg)
 
 
-## master
+# expert
 
 
 ![blue](https://user-images.githubusercontent.com/73610050/183650090-a8689b33-899a-4c16-9bf5-f22706d76ddb.jpg)
 
 
 
-## Iternational master
+# Iternational master
 
 
 ![orange](https://user-images.githubusercontent.com/73610050/183650159-7da8f94b-7dca-466c-9925-c774b51ad8a4.jpg)
 
 
 
-## legendry Grand Master
+# legendry Grand Master
 
 
 ![red](https://user-images.githubusercontent.com/73610050/183650326-ea9f73e4-36aa-4163-9463-300271276e45.jpg)
 
 
-# and many other changes in ui for different ratted users
+and many other changes in ui for different ratted users
 
-and features are
+some of the other features are
 
 2- detailed visualization of questions solved by user with verdicts
 
 3-languages used by user while solving problems
 
-# and the feature which is not there in any visualizer out there
+And the feature which is not there in any visualizer out there
 
 4- finding out the tags solved by user in between sertaing of questions
 
