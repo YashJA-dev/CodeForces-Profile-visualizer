@@ -69,13 +69,13 @@ class Contest_blogs extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Flexible(flex: 2,fit: FlexFit.tight,child: Image.asset("images/contest.jpg",fit:BoxFit.cover)),
+                  Flexible(flex: 5,fit: FlexFit.tight,child: Image.asset("images/contest.jpg",fit:BoxFit.cover)),
                   Flexible(
                     flex: 1,
                     fit: FlexFit.tight,
                     child: FittedBox(
                       child: Text(
-                        "Total Contests Paticipated",
+                        "Total Contests",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.grey,
@@ -85,12 +85,28 @@ class Contest_blogs extends StatelessWidget {
                     ),
                   ),
                   Flexible(
-                    flex: 0,
+                    flex: 1,
                     fit: FlexFit.tight,
-                    child: Text(
-                      "${contestInfo.contestDataList.length}",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.red),
+                    child: FittedBox(
+                      child: Text(
+                        "Participated",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: FittedBox(
+                      child: Text(
+                        "${contestInfo.contestDataList.length}",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.red),
+                      ),
                     ),
                   )
                 ],

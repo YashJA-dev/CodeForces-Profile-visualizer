@@ -102,12 +102,27 @@ class RankingStatistics extends StatelessWidget {
                       flex: 1,
                       child: FittedBox(
                         child: Text(
-                          "${userData.maxRank} \n ( ${userData.maxRating} )",
+                          "${userData.maxRank}",
                           style: TextStyle(
                             color: ColorDecider.fromRank(rank: userData.maxRank)
                                 .getPrimaryColor(),
                             fontWeight: FontWeight.bold,
-                            fontSize: height * 0.03,
+                            // fontSize: height * 0.03,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: FittedBox(
+                        child: Text(
+                          "( ${userData.maxRating} )",
+                          style: TextStyle(
+                            color: ColorDecider.fromRank(rank: userData.maxRank)
+                                .getPrimaryColor(),
+                            fontWeight: FontWeight.bold,
+                            // fontSize: height * 0.03,
                           ),
                           textAlign: TextAlign.center,
                         ),

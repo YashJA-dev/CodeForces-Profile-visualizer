@@ -104,7 +104,7 @@ class UserData {
           if (months == 0)
             return ("$yrs Years Ago");
           else
-            return ("$yrs Years $months Moths Ago");
+            return ("$yrs Years $months Months Ago");
         }
       }
     }

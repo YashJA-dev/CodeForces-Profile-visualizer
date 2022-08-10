@@ -99,7 +99,7 @@ class SubmissionTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Flexible(flex: 3,
+                  Flexible(flex: 5,
                       fit: FlexFit.tight,
                       child: Image.asset("images/problem.png",fit: BoxFit.cover,),),
                   Flexible(
@@ -107,7 +107,7 @@ class SubmissionTile extends StatelessWidget {
                       fit: FlexFit.tight,
                     child: FittedBox(
                       child: Text(
-                        "Total Subbmision",
+                        "Total",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.grey,
@@ -117,11 +117,27 @@ class SubmissionTile extends StatelessWidget {
                     ),
                   ),
                   Flexible(
-                    flex: 0,
-                    child: Text(
-                      "${problemsData.getResult.length}",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.red),
+                    flex: 1,
+                      fit: FlexFit.tight,
+                    child: FittedBox(
+                      child: Text(
+                        "Submissions",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: FittedBox(
+                      child: Text(
+                        "${problemsData.getResult.length}",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.red),
+                      ),
                     ),
                   )
                 ],
