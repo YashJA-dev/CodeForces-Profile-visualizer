@@ -73,13 +73,15 @@ class Contest_blogs extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     fit: FlexFit.tight,
-                    child: Text(
-                      "Total Contests Paticipated",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
+                    child: FittedBox(
+                      child: Text(
+                        "Total Contests Paticipated",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
                   Flexible(

@@ -105,13 +105,15 @@ class SubmissionTile extends StatelessWidget {
                   Flexible(
                     flex: 1,
                       fit: FlexFit.tight,
-                    child: Text(
-                      "Total Subbmision",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
+                    child: FittedBox(
+                      child: Text(
+                        "Total Subbmision",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
                   Flexible(
